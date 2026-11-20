@@ -123,19 +123,19 @@ let kana = {
         { 'ピャ': 'pya', 'ピュ': 'pyu', 'ピョ': 'pyo' },
 
     'ekw':
-        {'ウィ': 'wi', 'ウェ': 'we', 'ウォ': 'wo'},
+        { 'ウィ': 'wi', 'ウェ': 'we', 'ウォ': 'wo' },
     'ekv':
-        {'ヴァ': 'va', 'ヴィ': 'vi', 'ヴ': 'vu', 'ヴェ': 've', 'ヴォ': 'vo'},
+        { 'ヴァ': 'va', 'ヴィ': 'vi', 'ヴ': 'vu', 'ヴェ': 've', 'ヴォ': 'vo' },
     'ekf':
-        {'ファ': 'fa', 'フィ': 'fi', 'フェ': 'fe', 'フォ': 'fo'},
+        { 'ファ': 'fa', 'フィ': 'fi', 'フェ': 'fe', 'フォ': 'fo' },
     'ekt':
-        {'ツァ': 'tsa', 'ツィ': 'tsi', 'ツェ': 'tse', 'ツォ': 'tso'},
+        { 'ツァ': 'tsa', 'ツィ': 'tsi', 'ツェ': 'tse', 'ツォ': 'tso' },
     'ekmisc':
-        {'ティ': 'ti', 'トゥ': 'tu', 'シェ': 'she'},
+        { 'ティ': 'ti', 'トゥ': 'tu', 'シェ': 'she' },
     'ekmisc2':
-        {'ディ': 'di', 'ドゥ': 'du', 'ジェ': 'je'},
+        { 'ディ': 'di', 'ドゥ': 'du', 'ジェ': 'je' },
     'ekmisc3':
-        {'チェ': 'che'},
+        { 'チェ': 'che' },
 }
 
 let show_tools = ['あ', 'い', 'う', 'え', 'お', 'か', 'き', 'く', 'け', 'こ', 'さ', 'し', 'す', 'せ', 'そ', 'た', 'ち', 'つ', 'て', 'と', 'な', 'に', 'ぬ', 'ね', 'の', 'は', 'ひ', 'ふ', 'へ', 'ほ', 'ま', 'み', 'む', 'め', 'も', 'や', 'ゆ', 'よ', 'ら', 'り', 'る', 'れ', 'ろ', 'わ', 'を', 'ん', 'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ', 'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'マ', 'ミ', 'ム', 'メ', 'モ', 'ヤ', 'ユ', 'ヨ', 'ラ', 'リ', 'ル', 'レ', 'ロ', 'ワ', 'ヲ', 'ン'];
@@ -195,6 +195,9 @@ function save_settings() {
             const checked = inputs[i].checked ? '1' : '0';
             localStorage.setItem('kana_' + inputs[i].id, checked);
         }
+        if (inputs[i].type == 'number') {
+            localStorage.setItem('kana_' + inputs[i].id, inputs[i].value);
+        }
     }
 
     collect();
@@ -209,6 +212,12 @@ function load_settings() {
                 inputs[i].checked = true;
             } else if (setting === '0') {
                 inputs[i].checked = false;
+            }
+        }
+        if (inputs[i].type == 'number') {
+            const val = localStorage.getItem('kana_' + inputs[i].id);
+            if (val !== null) {
+                inputs[i].value = val;
             }
         }
     }
@@ -281,6 +290,7 @@ function collect() {
 
 function show_kana() {
     wrong = false;
+    document.getElementById('message').innerHTML = '&nbsp;';
     document.getElementById('input_box').value = '';
 
     if (active.length == 0) {
@@ -313,7 +323,7 @@ function show_kana() {
     } else {
         document.getElementById('kana').innerHTML = '<img id="kana_image" src="fonts_' + theme + '/' + font + '/' + cur_kana + '.png" />';
         //when image fails to load
-        document.getElementById('kana_image').onerror = function() {
+        document.getElementById('kana_image').onerror = function () {
             collect();
             show_kana();
         };
@@ -324,6 +334,26 @@ function show_kana() {
         document.getElementById('tool_stroke').style.visibility = 'hidden';
     } else {
         document.getElementById('tool_stroke').style.visibility = 'visible';
+    }
+}
+
+function show_kana_with_delay() {
+    const delayInput = document.getElementById('answer-delay');
+    const delaySeconds = delayInput ? parseFloat(delayInput.value) : 0;
+    const delayMs = isNaN(delaySeconds) ? 0 : delaySeconds * 1000;
+
+    if (delayMs > 0) {
+        const inputBox = document.getElementById('input_box');
+        inputBox.disabled = true;
+        inputBox.value = '';
+
+        setTimeout(() => {
+            inputBox.disabled = false;
+            show_kana();
+            inputBox.focus();
+        }, delayMs);
+    } else {
+        show_kana();
     }
 }
 
@@ -372,8 +402,11 @@ function check_answer() {
         total_answered += 1;
         if (!wrong) {
             total_correct += 1;
+            if (document.getElementById('correct-answer-audio').checked) {
+                play_sound();
+            }
         }
-        show_kana();
+        show_kana_with_delay();
     }
 
     if (total_answered > 0) {
@@ -383,6 +416,8 @@ function check_answer() {
         }
     }
 }
+
+
 
 function force_next() {
     if (shuffled.length > 3) {
@@ -433,6 +468,12 @@ onload = function () {
             inputs[i].onclick = save_settings;
             inputs[i].onpropertychange = inputs[i].oninput;
         }
+    }
+
+    const delayInput = document.getElementById('answer-delay');
+    if (delayInput) {
+        delayInput.addEventListener('change', save_settings);
+        delayInput.addEventListener('input', save_settings);
     }
 
     show_kana();

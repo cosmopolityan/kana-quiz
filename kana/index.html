@@ -397,9 +397,9 @@ Word audio from JapanesePod101: http://assets.languagepod101.com/dictionary/japa
 
             <h3>Katakana extended <span class="checkall"><a onclick="check('kecheck')">check all</a> | <a
                         onclick="uncheck('kecheck')">uncheck all</a></span></h3>
-			<p>
-				Don't worry too much about these if you've just started learning kana.
-			</p>
+            <p>
+                Don't worry too much about these if you've just started learning kana.
+            </p>
             <table>
                 <tbody>
                     <tr class="checkrow kecheck">
@@ -478,15 +478,24 @@ Word audio from JapanesePod101: http://assets.languagepod101.com/dictionary/japa
                     </tr>
                     <tr>
                         <td><span class="font_example">ぎ</span></td>
-                        <td><span class="font_example font_example_image A-OTF-BokutohNStd-Regular-example"><img alt="" src=""></span></td>
-                        <td><span class="font_example font_example_image A-OTF-FolkPro-Regular-example"><img alt="" src=""></span></td>
-                        <td><span class="font_example font_example_image A-OTF-HappyNStd-Regular-example"><img alt="" src=""></span></td>
-                        <td><span class="font_example font_example_image A-OTF-KumoyaStd-Regular-example"><img alt="" src=""></span></td>
-                        <td><span class="font_example font_example_image A-OTF-KyokaICAPro-Regular-example"><img alt="" src=""></span></td>
-                        <td><span class="font_example font_example_image A-OTF-Shuuei3Std-Regular-example"><img alt="" src=""></span></td>
-                        <td><span class="font_example font_example_image A-OTF-ZenGoNStd-Regular-example"><img alt="" src=""></span></td>
-                        <td><span class="font_example font_example_image ArmedBanana-example"><img alt="" src=""></span></td>
-                        <td><span class="font_example font_example_image hiragino-kaku-example"><img alt="" src=""></span></td>
+                        <td><span class="font_example font_example_image A-OTF-BokutohNStd-Regular-example"><img alt=""
+                                    src=""></span></td>
+                        <td><span class="font_example font_example_image A-OTF-FolkPro-Regular-example"><img alt=""
+                                    src=""></span></td>
+                        <td><span class="font_example font_example_image A-OTF-HappyNStd-Regular-example"><img alt=""
+                                    src=""></span></td>
+                        <td><span class="font_example font_example_image A-OTF-KumoyaStd-Regular-example"><img alt=""
+                                    src=""></span></td>
+                        <td><span class="font_example font_example_image A-OTF-KyokaICAPro-Regular-example"><img alt=""
+                                    src=""></span></td>
+                        <td><span class="font_example font_example_image A-OTF-Shuuei3Std-Regular-example"><img alt=""
+                                    src=""></span></td>
+                        <td><span class="font_example font_example_image A-OTF-ZenGoNStd-Regular-example"><img alt=""
+                                    src=""></span></td>
+                        <td><span class="font_example font_example_image ArmedBanana-example"><img alt="" src=""></span>
+                        </td>
+                        <td><span class="font_example font_example_image hiragino-kaku-example"><img alt=""
+                                    src=""></span></td>
                     </tr>
 
                     <tr class="checkrow allfonts">
@@ -511,7 +520,8 @@ Word audio from JapanesePod101: http://assets.languagepod101.com/dictionary/japa
                         <td><span class="font_example font_example_image SNsanafon-example"><img alt=""></span></td>
                         <td><span class="font_example font_example_image sea-example"><img alt=""></span></td>
                         <td><span class="font_example font_example_image KOI-WIN-example"><img alt=""></span></td>
-                        <td><span class="font_example font_example_image sakamata-font-500-nostrict-example"><img alt=""></span></td>
+                        <td><span class="font_example font_example_image sakamata-font-500-nostrict-example"><img
+                                    alt=""></span></td>
                     </tr>
                 </tbody>
             </table>
@@ -520,8 +530,22 @@ Word audio from JapanesePod101: http://assets.languagepod101.com/dictionary/japa
 
             <h3>Misc Options</h3>
             <div class="misc-options">
-                <input type="checkbox" id="wrong-answer-hint" checked><label for="wrong-answer-hint" class="wrong-answer-hint">Wrong Answer Hint</label>
-                <input type="checkbox" id="wrong-answer-audio"><label for="wrong-answer-audio" class="wrong-answer-audio">Wrong Answer Audio</label>
+                <div class="option">
+                    <input type="checkbox" id="wrong-answer-hint" checked>
+                    <label for="wrong-answer-hint" class="wrong-answer-hint">Wrong Answer Hint</label>
+                </div>
+                <div class="option">
+                    <input type="checkbox" id="wrong-answer-audio">
+                    <label for="wrong-answer-audio" class="wrong-answer-audio">Wrong Answer Audio</label>
+                </div>
+                <div class="option">
+                    <input type="checkbox" id="correct-answer-audio">
+                    <label for="correct-answer-audio" class="correct-answer-audio">Correct Answer Audio</label>
+                </div>
+                <div class="option delay-option">
+                    <label for="answer-delay">Delay before next (s):</label>
+                    <input type="number" id="answer-delay" min="0" max="5" step="0.5" value="0">
+                </div>
             </div>
 
             <h3>Explanation</h3>
@@ -551,11 +575,12 @@ Word audio from JapanesePod101: http://assets.languagepod101.com/dictionary/japa
                 <p>The smaller kana ゅ, ょ, and ゃ are used to combine kana sounds. For example, in ぎゃ the
                     consonant of ぎ (gi) combines with the sound from や
                     (ya): gya. The small っ (distinct from つ/tsu) is not itself pronounced, but lengthens the consonant
-                    that follows, as in <a onclick="play_other('nippon')"><span class="speaker-button"></span><span> にっぽん</span></a> (nippon);
+                    that follows, as in <a onclick="play_other('nippon')"><span class="speaker-button"></span><span>
+                            にっぽん</span></a> (nippon);
                     the
                     effect of holding your mouth in the consonant's position resembles a small pause. Contrast:
-                    <a onclick="play_other('gakou')"><span class="speaker-button"></span>  がこう,</a>
-                    <a onclick="play_other('gakkou')"><span class="speaker-button"></span>  がっこう.</a>
+                    <a onclick="play_other('gakou')"><span class="speaker-button"></span> がこう,</a>
+                    <a onclick="play_other('gakkou')"><span class="speaker-button"></span> がっこう.</a>
                     <a href="http://www.guidetojapanese.org/learn/grammar/hiragana">Tae Kim</a> has more information.
                 </p>
                 <p></p>
